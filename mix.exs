@@ -25,7 +25,7 @@ defmodule Contact.MixProject do
       {:jason, "~> 1.4"},
       {:bandit, "~> 1.0"},
       # ----- testing
-      {:mix_test_interactive, path: "~/src/Forks/mix_test_interactive", only: :dev, runtime: false}
+      {:mix_test_interactive, "~> 2.0", only: :dev, runtime: false}
     ]
   end
 end
