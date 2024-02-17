@@ -1,4 +1,4 @@
-defmodule Contactd.Util.IO do
+defmodule Execd.Util.IO do
 
   def puts(text) do
     unless Mix.env() == :test do

@@ -1,4 +1,4 @@
-defmodule Contactd.Util.Xmap do
+defmodule Execd.Util.Xmap do
 
   def assign(map1, map2) when is_map(map2) do
     Map.merge(map1, map2)

@@ -1,6 +1,6 @@
-# defmodule Contactd.Util.DbFts do
+# defmodule Execd.Util.DbFts do
 #
-#   alias Contactd.Doc.Section
+#   alias Execd.Doc.Section
 #
 #   def create_data_table(map, table) do
 #     values =

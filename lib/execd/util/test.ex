@@ -1,4 +1,4 @@
-defmodule Contactd.Util.Test do
+defmodule Execd.Util.Test do
 
   def base_dir do
     "/tmp/test_dir"

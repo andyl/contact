@@ -1,4 +1,4 @@
-defmodule Contactd.Util.File do
+defmodule Execd.Util.File do
   def markdown_files(path) do
     case File.stat(path) do
       {:ok, %File.Stat{type: :directory}} ->

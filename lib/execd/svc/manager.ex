@@ -1,12 +1,12 @@
-# defmodule Contactd.Svc.Manager do
+# defmodule Execd.Svc.Manager do
 #
 #   @moduledoc "Database Manager"
 #
 #   use GenServer
 #
-#   alias Contactd.Fts.Db
-#   alias Contactd.Doc.Dir
-#   alias Contactd.Util
+#   alias Execd.Fts.Db
+#   alias Execd.Doc.Dir
+#   alias Execd.Util
 #
 #   @procname :svc_manager
 #

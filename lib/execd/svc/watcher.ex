@@ -1,9 +1,9 @@
-# defmodule Contactd.Svc.Watcher do
+# defmodule Execd.Svc.Watcher do
 #
 #   use GenServer
 #
-#   alias Contactd.Util
-#   alias Contactd.Svc.Manager
+#   alias Execd.Util
+#   alias Execd.Svc.Manager
 #
 #
 #   @moduledoc "Watch the filesystem for changes."

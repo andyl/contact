@@ -1,4 +1,4 @@
-defmodule Contactd.Util.Queue do
+defmodule Execd.Util.Queue do
 
   def new do
     :queue.new()

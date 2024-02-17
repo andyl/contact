@@ -1,16 +1,16 @@
-defmodule Contactd.Application do
+defmodule Execd.Application do
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
   @moduledoc false
 
   use Application
 
-  @procname :contactd
+  @procname :execd
 
   @impl true
   def start(_type, _args) do
     children = [
-      Contactd.Svc.Supervisor
+      Execd.Svc.Supervisor
     ]
 
     opts = [strategy: :one_for_one, name: @procname]

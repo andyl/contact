@@ -1,9 +1,9 @@
-defmodule Contactd.Svc.Httpd.Router do
+defmodule Execd.Svc.Httpd.Router do
   @moduledoc false
 
   use Plug.Router, init_mode: :runtime
 
-  # alias Contactd.Svc.Manager
+  # alias Execd.Svc.Manager
 
   require Logger
 
@@ -34,7 +34,7 @@ defmodule Contactd.Svc.Httpd.Router do
   get "/search_nvim" do
     query = Plug.Conn.fetch_query_params(conn).query_params["query"]
 
-    Contactd.Util.IO.puts("search_nvim: #{query}")
+    Execd.Util.IO.puts("search_nvim: #{query}")
 
     result = case query do
       nil -> "[]"
