@@ -1,4 +1,4 @@
-defmodule Contact.MixProject do
+defmodule Contactd.MixProject do
   use Mix.Project
 
   def project do
@@ -14,7 +14,7 @@ defmodule Contact.MixProject do
   def application do
     [
       extra_applications: [:logger],
-      mod: {Contact.Application, []}
+      mod: {Contactd.Application, []}
     ]
   end
 
@@ -22,6 +22,7 @@ defmodule Contact.MixProject do
     [
       # ----- basics
       {:swoosh, "~> 1.15"},
+      {:hackney, "~> 1.9"},
       {:jason, "~> 1.4"},
       {:bandit, "~> 1.0"},
       # ----- testing
