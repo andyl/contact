@@ -1,20 +1,20 @@
-defmodule Contact.Application do
+defmodule Contactd.Application do
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
   @moduledoc false
 
   use Application
 
+  @procname :contactd
+
   @impl true
   def start(_type, _args) do
     children = [
-      # Starts a worker by calling: Contact.Worker.start_link(arg)
-      # {Contact.Worker, arg}
+      Contactd.Svc.Supervisor
     ]
 
-    # See https://hexdocs.pm/elixir/Supervisor.html
-    # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: Contact.Supervisor]
+    opts = [strategy: :one_for_one, name: @procname]
     Supervisor.start_link(children, opts)
   end
+
 end
