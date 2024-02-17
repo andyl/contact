@@ -14,9 +14,7 @@ defmodule Execd.Svc.Httpd.Router do
   end
 
   post "/submit" do
-    data = conn.params
-
-    dbg(data)
+    _data = conn.params
 
     send_resp(conn, 200, ":form-data-ok")
   end
