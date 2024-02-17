@@ -1,6 +1,6 @@
-defmodule Contact do
+defmodule Contactd do
   @moduledoc """
-  Documentation for `Contact`.
+  Documentation for `Contactd`.
   """
 
   @doc """
@@ -8,7 +8,7 @@ defmodule Contact do
 
   ## Examples
 
-      iex> Contact.hello()
+      iex> Contactd.hello()
       :world
 
   """
