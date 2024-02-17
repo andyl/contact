@@ -5,9 +5,9 @@ defmodule Execd.Svc.Httpd.Router do
 
   require Logger
 
+  plug Plug.Parsers, parsers: [:urlencoded]
   plug(:match)
   plug(:dispatch)
-  plug Plug.Parsers, parsers: [:urlencoded]
 
   get "/" do
     send_resp(conn, 200, ":ok")
