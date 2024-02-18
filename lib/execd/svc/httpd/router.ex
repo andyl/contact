@@ -3,6 +3,8 @@ defmodule Execd.Svc.Httpd.Router do
 
   use Plug.Router, init_mode: :runtime
 
+  alias Execd.Svc.Runner.Worker
+
   require Logger
 
   plug Plug.Parsers, parsers: [:urlencoded]
@@ -14,7 +16,8 @@ defmodule Execd.Svc.Httpd.Router do
   end
 
   post "/submit" do
-    _data = conn.params
+    conn.params
+    |> Worker.post()
 
     send_resp(conn, 200, ":form-data-ok")
   end
