@@ -11,7 +11,7 @@ defmodule Execd.Svc.Runner.Worker do
   # ----- api
 
   @doc "Run the command"
-  def run(cmd, args) do
+  def run(cmd, args \\ []) do
     GenServer.cast(@procname, {:er_run, cmd, args})
   end
 
@@ -31,7 +31,8 @@ defmodule Execd.Svc.Runner.Worker do
   # ----- callbacks
 
   def handle_cast({:er_run, cmd, args}, state) do
-    IO.inspect({cmd, args})
+    IO.inspect({cmd, args}, label: "Running ")
+    System.cmd(cmd, args)
     {:noreply, state}
   end
 

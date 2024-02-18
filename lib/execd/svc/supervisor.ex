@@ -4,7 +4,6 @@ defmodule Execd.Svc.Supervisor do
 
   use Supervisor
 
-  # @dir "/home/aleak/util/org"
   @procname :svc_supervisor
 
   def start_link(init_arg) do
