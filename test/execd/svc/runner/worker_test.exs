@@ -5,12 +5,6 @@ defmodule Execd.Svc.Runner.WorkerTest do
 
   alias Execd.Svc.Runner.Worker
 
-  describe "#myfunc/1" do
-    test "description" do
-      assert true
-    end
-  end
-
   describe "#start_link/1" do
     test "using start_link directly" do
       assert {:ok, _pid} = Worker.start_link([])
@@ -24,28 +18,33 @@ defmodule Execd.Svc.Runner.WorkerTest do
       assert start_supervised!({Worker, []})
     end
 
+    test "without arguments" do
+      assert start_supervised!(Worker)
+    end
+
     test "registered process name" do
       start_supervised({Worker, []})
       assert Process.whereis(:runner_worker)
     end
   end
 
-#   describe "#insert/1" do
-#     test "using a file with one section" do
-#       start_supervised({Worker, [base_dir: base_dir()]})
-#       count1 = Worker.select_all() |> length()
-#       Worker.insert(Test.org_file())
-#       count2 = Worker.select_all() |> length()
-#       assert count2 == count1 + 1
-#     end
-#
-#     test "using a file with three sections" do
-#       start_supervised({Worker, [base_dir: base_dir()]})
-#       count1 = Worker.select_all() |> length()
-#       Worker.insert(Test.test_file())
-#       count2 = Worker.select_all() |> length()
-#       assert count2 == count1 + 3
-#     end
-#   end
+  describe "#run/2" do
+    test "with a simple command" do
+      start_supervised(Worker)
+      result = Worker.run("ls", [])
+      assert result == :ok
+    end
+
+    test "without arguments" do
+      start_supervised(Worker)
+      result = Worker.run("ls")
+      assert result == :ok
+    end
+
+    test "commands in rapid succession" do
+      start_supervised(Worker)
+      Enum.each(1..2000, fn _ -> Worker.run("ls") end)
+    end
+  end
 
 end
