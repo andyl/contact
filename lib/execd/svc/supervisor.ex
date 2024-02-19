@@ -12,9 +12,9 @@ defmodule Execd.Svc.Supervisor do
 
   @impl true
   def init(_init_arg) do
-    if Application.get_env(:contactd, :server) do
+    if Application.get_env(:execd, :server) do
       children = [
-        {Execd.Svc.Httpd.Server, []},
+        Execd.Svc.Httpd.Server,
         Execd.Svc.Runner.Supervisor
       ]
       Supervisor.init(children, strategy: :one_for_one)
