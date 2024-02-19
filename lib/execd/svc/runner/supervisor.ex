@@ -11,8 +11,9 @@ defmodule Execd.Svc.Runner.Supervisor do
 
   @impl true
   def init(_init_arg) do
+    cmd = Application.get_env(:execd, :command)
     children = [
-      Execd.Svc.Runner.Worker
+      {Execd.Svc.Runner.Worker, [command: cmd]}
     ]
 
     Supervisor.init(children, strategy: :one_for_one)
