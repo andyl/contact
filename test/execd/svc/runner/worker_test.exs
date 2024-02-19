@@ -4,6 +4,7 @@ defmodule Execd.Svc.Runner.WorkerTest do
   use ExUnit.Case
 
   alias Execd.Svc.Runner.Worker
+  alias Execd.Util
 
   describe "#start_link/1" do
     test "using start_link directly" do
@@ -96,15 +97,16 @@ defmodule Execd.Svc.Runner.WorkerTest do
     end
 
     test "with redirect" do
-      file = "/tmp/tong.txt"
+      rand = Util.File.rand()
+      file = Path.join(System.tmp_dir!(), "datafile_#{rand}.txt")
       data = "HELLOWORLD"
       cmd  = "echo @data > #{file}"
-      System.cmd("rm", ["-f", file])
       start_supervised({Worker, [command: cmd]})
       assert Worker.getcmd() == cmd
       assert Worker.post(data) == :ok
       assert File.exists?(file)
       assert File.read!(file) |> String.trim() == data
+      System.cmd("rm", ["-f", file])
     end
   end
 
