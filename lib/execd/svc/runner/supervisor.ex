@@ -5,15 +5,18 @@ defmodule Execd.Svc.Runner.Supervisor do
 
   @procname :runner_supervisor
 
-  def start_link(init_arg) do
-    Supervisor.start_link(__MODULE__, init_arg, name: @procname)
+  def start_link([command: _cmd] = args) do
+    Supervisor.start_link(__MODULE__, args, name: @procname)
+  end
+
+  def start_link(_init_arg) do
+    Supervisor.start_link(__MODULE__, [command: ""], name: @procname)
   end
 
   @impl true
-  def init(_init_arg) do
-    cmd = Application.get_env(:execd, :command)
+  def init([command: _cmd] = args) do
     children = [
-      {Execd.Svc.Runner.Worker, [command: cmd]}
+      {Execd.Svc.Runner.Worker, args}
     ]
 
     Supervisor.init(children, strategy: :one_for_one)
