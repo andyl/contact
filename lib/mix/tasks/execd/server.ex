@@ -6,15 +6,16 @@ defmodule Mix.Tasks.Execd.Server do
   use Mix.Task
 
   @impl Mix.Task
-  def run(args) do
+  def run(cmd) when is_binary(cmd) do
     Application.put_env(:execd, :server, true)
-    Application.put_env(:execd, :command, set_cmd(args))
+    Application.put_env(:execd, :command, cmd)
     Mix.Task.run("app.start", ["--preload-modules"])
     Mix.Tasks.Run.run(["--no-halt"])
   end
 
-  defp set_cmd(_args) do
-    {"echo", []}
+  @impl Mix.Task
+  def run(_) do
+    run("")
   end
 
 end
