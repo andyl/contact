@@ -1,4 +1,4 @@
-defmodule Execd.MixProject do
+defmodule Formin.MixProject do
   use Mix.Project
 
   def project do
@@ -15,7 +15,7 @@ defmodule Execd.MixProject do
   def application do
     [
       extra_applications: [:logger],
-      mod: {Execd.Application, []}
+      mod: {Formin.Application, []}
     ]
   end
 

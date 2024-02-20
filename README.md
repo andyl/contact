@@ -1,4 +1,4 @@
-# Execd 
+# Formin 
 
 Simple HTML form handler. 
 

@@ -1,9 +1,9 @@
-defmodule Execd.Svc.Runner.SupervisorTest do
+defmodule Formin.Svc.Runner.SupervisorTest do
 
   use ExUnit.Case
 
-  alias Execd.Svc.Runner.Supervisor
-  alias Execd.Svc.Runner.Worker
+  alias Formin.Svc.Runner.Supervisor
+  alias Formin.Svc.Runner.Worker
 
   describe "#start_link/1" do
     test "using start_link directly" do

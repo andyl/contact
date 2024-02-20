@@ -1,8 +1,8 @@
-defmodule Execd.Svc.Httpd.RouterTest do
+defmodule Formin.Svc.Httpd.RouterTest do
   use ExUnit.Case
   import Plug.Test
 
-  alias Execd.Svc.Httpd.Router
+  alias Formin.Svc.Httpd.Router
 
   @opts Router.init([])
 

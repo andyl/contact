@@ -1,10 +1,10 @@
-defmodule Execd.Svc.Runner.Worker do
+defmodule Formin.Svc.Runner.Worker do
 
   @moduledoc "Command Runner"
 
   use GenServer
 
-  alias Execd.Util
+  alias Formin.Util
 
   @procname :runner_worker
 

@@ -1,4 +1,4 @@
-defmodule Execd.Util.File do
+defmodule Formin.Util.File do
   def mtime(path) do
     case File.stat(path) do
       {:ok, %File.Stat{mtime: mtime}} -> mtime |> format_mtime()

@@ -1,4 +1,4 @@
-defmodule Execd.Svc.Runner.Supervisor do
+defmodule Formin.Svc.Runner.Supervisor do
   @moduledoc false
 
   use Supervisor
@@ -16,7 +16,7 @@ defmodule Execd.Svc.Runner.Supervisor do
   @impl true
   def init([command: _cmd] = args) do
     children = [
-      {Execd.Svc.Runner.Worker, args}
+      {Formin.Svc.Runner.Worker, args}
     ]
 
     Supervisor.init(children, strategy: :one_for_one)

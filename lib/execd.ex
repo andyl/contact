@@ -1,6 +1,6 @@
-defmodule Execd do
+defmodule Formin do
   @moduledoc """
-  Documentation for `Execd`.
+  Documentation for `Formin`.
   """
 
   @doc """
@@ -8,7 +8,7 @@ defmodule Execd do
 
   ## Examples
 
-      iex> Execd.hello()
+      iex> Formin.hello()
       :world
 
   """

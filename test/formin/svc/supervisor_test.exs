@@ -1,9 +1,9 @@
-defmodule Execd.Svc.SupervisorTest do
+defmodule Formin.Svc.SupervisorTest do
 
   use ExUnit.Case, async: false
 
-  alias Execd.Svc.Supervisor
-  alias Execd.Svc.Runner.Worker
+  alias Formin.Svc.Supervisor
+  alias Formin.Svc.Runner.Worker
 
   describe "#start_link/1" do
     # test "with []" do

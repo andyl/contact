@@ -1,4 +1,4 @@
-defmodule Execd.Util.IO do
+defmodule Formin.Util.IO do
 
   def puts(text) do
     unless Mix.env() == :test do

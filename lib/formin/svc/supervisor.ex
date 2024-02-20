@@ -1,4 +1,4 @@
-defmodule Execd.Svc.Supervisor do
+defmodule Formin.Svc.Supervisor do
 
   @moduledoc false
 
@@ -20,8 +20,8 @@ defmodule Execd.Svc.Supervisor do
     if Application.get_env(:execd, :server) do
       cmd = Application.get_env(:execd, :command) || ""
       children = [
-        Execd.Svc.Httpd.Server,
-        {Execd.Svc.Runner.Supervisor, [command: cmd]}
+        Formin.Svc.Httpd.Server,
+        {Formin.Svc.Runner.Supervisor, [command: cmd]}
       ]
       Supervisor.init(children, strategy: :one_for_one)
     else

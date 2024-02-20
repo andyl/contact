@@ -1,10 +1,10 @@
 # test/execd/svc/runner/worker_test.exs
-defmodule Execd.Svc.Runner.WorkerTest do
+defmodule Formin.Svc.Runner.WorkerTest do
 
   use ExUnit.Case
 
-  alias Execd.Svc.Runner.Worker
-  alias Execd.Util
+  alias Formin.Svc.Runner.Worker
+  alias Formin.Util
 
   describe "#start_link/1" do
     test "using start_link directly" do

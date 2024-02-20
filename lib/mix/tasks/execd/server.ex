@@ -1,4 +1,4 @@
-defmodule Mix.Tasks.Execd.Server do
+defmodule Mix.Tasks.Formin.Server do
   @shortdoc "Starts the server"
 
   @moduledoc "Starts the server"

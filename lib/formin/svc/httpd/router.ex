@@ -1,9 +1,9 @@
-defmodule Execd.Svc.Httpd.Router do
+defmodule Formin.Svc.Httpd.Router do
   @moduledoc false
 
   use Plug.Router, init_mode: :runtime
 
-  alias Execd.Svc.Runner.Worker
+  alias Formin.Svc.Runner.Worker
 
   require Logger
 

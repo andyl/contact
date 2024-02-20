@@ -1,9 +1,9 @@
-defmodule Execd.Svc.Httpd.Server do
+defmodule Formin.Svc.Httpd.Server do
 
   @moduledoc false
 
-  alias Execd.Svc.Httpd.Router
-  alias Execd.Util
+  alias Formin.Svc.Httpd.Router
+  alias Formin.Util
 
   def child_spec(_) do
     Util.IO.puts("Starting Httpd on port 5001")
