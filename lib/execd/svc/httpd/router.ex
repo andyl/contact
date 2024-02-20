@@ -17,6 +17,7 @@ defmodule Execd.Svc.Httpd.Router do
 
   post "/submit" do
     conn.params
+    |> Jason.encode!()
     |> Worker.post()
 
     send_resp(conn, 200, ":form-data-ok")
