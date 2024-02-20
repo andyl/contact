@@ -16,6 +16,7 @@ defmodule Execd.Svc.SupervisorTest do
 
     test "registered process name" do
       start_supervised({Supervisor, []})
+      assert Process.whereis(:svc_supervisor)
       assert Process.whereis(:runner_supervisor)
       assert Process.whereis(:runner_worker)
     end
