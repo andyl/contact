@@ -25,7 +25,7 @@ defmodule Formin.Svc.SupervisorTest do
   describe "passing down commands" do
     test "with start_supervised! and a command arg" do
       cmd = "echo HI"
-      Application.put_env(:execd, :command, cmd)
+      Application.put_env(:formin, :command, cmd)
       assert start_supervised!({Supervisor, [server: true]})
       assert Worker.getcmd() == cmd
     end

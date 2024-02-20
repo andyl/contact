@@ -5,7 +5,7 @@ defmodule Formin.Application do
 
   use Application
 
-  @procname :execd
+  @procname :formin
 
   @impl true
   def start(_type, _args) do

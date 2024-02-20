@@ -9,9 +9,9 @@ The script can be any executable program: a binary executable, or a script
 written in Bash, Elixir, Ruby, Python etc.
 
 To start the server: 
-- 1) `mix execd.server "echo HI"`
-- 2) `mix execd.server "echo HI > /tmp/myfile.txt"`
-- 3) `mix execd.server "echo '@data' > /tmp/myfile.txt"` 
+- 1) `mix formin.server "echo HI"`
+- 2) `mix formin.server "echo HI > /tmp/myfile.txt"`
+- 3) `mix formin.server "echo '@data' > /tmp/myfile.txt"` 
 
 Now the server listens for form data at POST:/submit.
 

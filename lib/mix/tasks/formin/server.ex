@@ -7,8 +7,8 @@ defmodule Mix.Tasks.Formin.Server do
 
   @impl Mix.Task
   def run(cmd) when is_binary(cmd) do
-    Application.put_env(:execd, :server, true)
-    Application.put_env(:execd, :command, cmd)
+    Application.put_env(:formin, :server, true)
+    Application.put_env(:formin, :command, cmd)
     Mix.Task.run("app.start", ["--preload-modules"])
     Mix.Tasks.Run.run(["--no-halt"])
   end

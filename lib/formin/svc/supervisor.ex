@@ -7,7 +7,7 @@ defmodule Formin.Svc.Supervisor do
   @procname :svc_supervisor
 
   def start_link([server: true]) do
-    Application.put_env(:execd, :server, true)
+    Application.put_env(:formin, :server, true)
     start_link([])
   end
 
@@ -17,8 +17,8 @@ defmodule Formin.Svc.Supervisor do
 
   @impl true
   def init(_init_arg) do
-    if Application.get_env(:execd, :server) do
-      cmd = Application.get_env(:execd, :command) || ""
+    if Application.get_env(:formin, :server) do
+      cmd = Application.get_env(:formin, :command) || ""
       children = [
         Formin.Svc.Httpd.Server,
         {Formin.Svc.Runner.Supervisor, [command: cmd]}
