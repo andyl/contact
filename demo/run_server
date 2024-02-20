@@ -1,0 +1,5 @@
+#!/usr/bin/bash 
+
+cd ~/src/formin 
+
+mix formin.server "echo '@data' >> /tmp/formin.log"

@@ -1,0 +1,40 @@
+<html>
+
+<head>
+  <style>
+    form label {
+      display: inline-block; 
+      width: 65px;
+    }
+    form input { 
+      width: 300px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <form action="http://localhost:5001/submit" method="post">
+    <input type="hidden" name="list" value="INB">
+    <label for="msg">Inbox:</label>
+    <input type="text" id="msg" name="msg">
+    <button type="submit">Send</button>
+  </form>
+
+  <form action="http://localhost:5001/submit" method="post">
+    <input type="hidden" name="list" value="GRO">
+    <label for="msg">Grocery:</label>
+    <input type="text" id="msg" name="msg">
+    <button type="submit">Send</button>
+  </form>
+
+  <form action="http://localhost:5001/submit" method="post">
+    <input type="hidden" name="list" value="ERR">
+    <label for="msg">Errand:</label>
+    <input type="text" id="msg" name="msg">
+    <button type="submit">Send</button>
+  </form>
+
+</body>
+
+</html>

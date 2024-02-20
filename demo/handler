@@ -1,0 +1,25 @@
+#!/usr/bin/env elixir 
+
+Mix.install([ 
+  {:jason, "~> 1.4"}
+]) 
+
+defmodule JsonDecrypter do
+  def main(args) do
+    [json_encrypted] = args
+    json_decrypted = decrypt(json_encrypted)
+    decoded_data = Jason.decode!(json_decrypted)
+    IO.inspect(decoded_data)
+  end
+
+  # Placeholder for the decryption function
+  # You need to replace this with your actual decryption logic
+  defp decrypt(encrypted_data) do
+    # For demonstration, we'll just return the encrypted data.
+    # Replace this with actual decryption logic.
+    encrypted_data
+  end
+end
+
+JsonDecrypter.main(System.argv())
+
