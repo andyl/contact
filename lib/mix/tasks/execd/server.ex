@@ -14,6 +14,10 @@ defmodule Mix.Tasks.Execd.Server do
   end
 
   @impl Mix.Task
+  def run([cmd]) when is_binary(cmd) do
+    run(cmd)
+  end
+
   def run(_) do
     run("")
   end
