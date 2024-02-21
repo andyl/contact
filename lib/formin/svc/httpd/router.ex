@@ -23,6 +23,10 @@ defmodule Formin.Svc.Httpd.Router do
     send_resp(conn, 200, ":form-data-ok")
   end
 
+  get "/favicon.ico" do
+    send_resp(conn, 200, "")
+  end
+
   match _ do
     Logger.error("File not found: #{conn.request_path}")
 
