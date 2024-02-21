@@ -16,9 +16,10 @@ defmodule Formin.Svc.SupervisorTest do
 
     test "registered process name" do
       start_supervised({Supervisor, []})
-      assert Process.whereis(:svc_supervisor)
+      Process.sleep(100)
       assert Process.whereis(:runner_supervisor)
       assert Process.whereis(:runner_worker)
+      assert Process.whereis(:svc_supervisor)
     end
   end
 
