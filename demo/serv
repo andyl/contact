@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# Check for the presence of a filename argument
+if [ -z "$1" ]; then
+  echo "Usage: $0 <filename> [-p <port>]"
+  exit 1
+fi
+
+filename=$1
+port=4040 # default port
+
+# Parse optional "-p <port>" flag
+while getopts "p:" opt; do
+  case ${opt} in
+    p )
+      port=$OPTARG
+      ;;
+    \? )
+      echo "Usage: $0 <filename> [-p <port>]"
+      exit 1
+      ;;
+  esac
+done
+
+# Start a web server process
+# Use Python SimpleHTTPServer (Python 2) or http.server (Python 3) module 
+echo "Serving $filename on $port"
+python -m SimpleHTTPServer $port &> /dev/null &
+server_pid=$!
+trap "kill $server_pid" EXIT
+
+# Wait a bit for the server to start up
+sleep 1
+
+# Serve the HTML file on the root route by rewriting requests
+# This requires nc (netcat) to handle HTTP requests manually
+while true; do
+  # Listen on the specified port and serve the content of the specified file
+  echo -e "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n$(cat $filename)" | nc -l -p $port -q 1
+  echo "Request at $(date)"
+done
+
