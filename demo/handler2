@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# This script takes a single argument, a JSON string, which is expected to have
+# two keys: "list" and "msg". It uses the 'jq' command to parse the JSON string
+# and extract the values of "list" and "msg". Based on the value of "list"
+# (which can be INB, GRO, or ERR), the script then calls one of three
+# executables:
+# - "inbox" if "list" is INB,
+# - "grocery" if "list" is GRO,
+# - "errand" if "list" is ERR,
+# with the "msg" value passed as an argument to the called executable. If the
+# "list" value is not one of the expected values or if no JSON string is
+# provided, the script will print an error message.
+
+
+# Check if a JSON string is provided as the first argument
+if [ -z "$1" ]; then
+  echo "No JSON string provided."
+  exit 1
+fi
+
+# Write the JSON string to a logfile 
+echo $1 >> /tmp/formin.log
+
+# Parse the JSON string to extract the "list" and "msg" values
+list=$(echo $1 | jq -r '.list')
+msg=$(echo $1 | jq -r '.msg')
+
+# Check the value of "list" and call the respective executable with "msg" as an argument
+case $list in
+  INB)
+    inbox "$msg"
+    ;;
+  GRO)
+    grocery "$msg"
+    ;;
+  ERR)
+    errand "$msg"
+    ;;
+  *)
+    echo "Invalid list value."
+    exit 1
+    ;;
+esac
