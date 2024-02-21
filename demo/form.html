@@ -3,11 +3,12 @@
 <head>
   <style>
     form label {
-      display: inline-block; 
+      display: inline-block;
       width: 65px;
     }
-    form input { 
-      width: 300px;
+
+    form input {
+      width: 200px;
     }
   </style>
 </head>
@@ -18,22 +19,39 @@
     <input type="hidden" name="list" value="INB">
     <label for="msg">Inbox:</label>
     <input type="text" id="msg" name="msg">
-    <button type="submit">Send</button>
+    <button onclick="send()" type="submit">Send</button>
   </form>
 
-  <form action="http://dove:5001/submit" method="post">
+  <form target="_blank" action="http://dove:5001/submit" method="post">
     <input type="hidden" name="list" value="GRO">
     <label for="msg">Grocery:</label>
     <input type="text" id="msg" name="msg">
-    <button type="submit">Send</button>
+    <button onclick="redir()" type="submit">Send</button>
   </form>
 
-  <form action="http://dove:5001/submit" method="post">
+  <form target="_blank" action="http://dove:5001/submit" method="post">
     <input type="hidden" name="list" value="ERR">
     <label for="msg">Errand:</label>
     <input type="text" id="msg" name="msg">
-    <button type="submit">Send</button>
+    <button onclick="redir()" type="submit">Send</button>
   </form>
+
+  <script>
+    function redir() {
+      window.location.href = "http://dove:4040";
+    }
+
+    function send() {
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          window.location.href = 'https://website.com/my-account';
+        }
+      };
+      xhttp.open("POST", "http://dove:5001/submit", true);
+      xhttp.send();
+    }
+  </script>
 
 </body>
 
