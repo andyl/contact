@@ -4,10 +4,12 @@ defmodule Formin.Svc.Httpd.Router do
   use Plug.Router, init_mode: :runtime
 
   alias Formin.Svc.Runner.Worker
+  alias Formin.Svc.Http.CorsPlug
 
   require Logger
 
   plug Plug.Parsers, parsers: [:urlencoded]
+  plug(CorsPlug)
   plug(:match)
   plug(:dispatch)
 
