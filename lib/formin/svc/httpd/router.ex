@@ -22,7 +22,7 @@ defmodule Formin.Svc.Httpd.Router do
     |> Jason.encode!()
     |> Worker.post()
 
-    send_resp(conn, 200, ":form-data-ok")
+    send_resp(conn, 200, ~s[{"status": "form-data-ok"}])
   end
 
   get "/favicon.ico" do
