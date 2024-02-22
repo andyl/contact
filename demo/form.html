@@ -1,6 +1,7 @@
 <html>
 
 <head>
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
   <style>
     form label {
       display: inline-block;
@@ -15,11 +16,11 @@
 
 <body>
 
-  <form action="http://dove:5001/submit" method="post">
+  <form id="form1">
     <input type="hidden" name="list" value="INB">
     <label for="msg">Inbox:</label>
     <input type="text" id="msg" name="msg">
-    <button onclick="send()" type="submit">Send</button>
+    <button type="submit">Send</button>
   </form>
 
   <form target="_blank" action="http://dove:5001/submit" method="post">
@@ -37,20 +38,31 @@
   </form>
 
   <script>
-    function redir() {
-      window.location.href = "http://dove:4040";
+    const form = document.querySelector("#form1");
+
+    async function sendData() {
+      const formData = new FormData(form);
+      const queryStr = new URLSearchParams(formData).toString(); 
+      console.log("STARTING sendDATA"); 
+      console.log(queryStr); 
+      console.log("HEY"); 
+
+      try {
+        const response = await fetch("http://dove:5001/submit", {
+          method: "POST",
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: queryStr,
+        });
+        console.log(await response.json());
+      } catch (e) {
+        console.error(e);
+      }
     }
 
-    function send() {
-      var xhttp = new XMLHttpRequest();
-      xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-          window.location.href = 'https://website.com/my-account';
-        }
-      };
-      xhttp.open("POST", "http://dove:5001/submit", true);
-      xhttp.send();
-    }
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      sendData();
+    });
   </script>
 
 </body>
