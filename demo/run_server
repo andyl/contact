@@ -2,5 +2,7 @@
 
 cd ~/src/formin 
 
+clear
+
 # mix formin.server "echo '@data' >> /tmp/formin.log"
 mix formin.server "~/src/formin/demo/handler2 '@data'"

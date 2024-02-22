@@ -24,6 +24,7 @@ done
 
 # Start a web server process
 # Use Python SimpleHTTPServer (Python 2) or http.server (Python 3) module 
+clear
 echo "Serving $filename on $port"
 python -m SimpleHTTPServer $port &> /dev/null &
 server_pid=$!
