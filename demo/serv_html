@@ -36,7 +36,7 @@ sleep 1
 # This requires nc (netcat) to handle HTTP requests manually
 while true; do
   # Listen on the specified port and serve the content of the specified file
-  echo -e "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n$(cat $filename)" | nc -l -p $port -q 1
+  echo -e "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nAccess-Control-Allow-Origin: *\r\n\r\n$(cat $filename)" | nc -l -p $port -q 1
   echo "Request at $(date)"
 done
 
