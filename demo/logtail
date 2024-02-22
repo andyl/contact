@@ -1,3 +1,5 @@
 #!/usr/bin/bash 
 
+touch /tmp/formin.log 
+
 tail -f /tmp/formin.log
