@@ -7,8 +7,7 @@ defmodule Formin.Svc.Http.CorsPlug do
 
   def call(conn, _options) do
     conn
-    |> put_req_header("Access-Control-Allow-Origin", "*")
-    |> put_resp_header("Access-Control-Allow-Origin", "*")
+    |> put_req_header("access-control-allow-origin", "*")
   end
 end
 
