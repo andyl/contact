@@ -23,46 +23,76 @@
     <button type="submit">Send</button>
   </form>
 
-  <form target="_blank" action="http://dove:5001/submit" method="post">
+  <form id="form2">
     <input type="hidden" name="list" value="GRO">
     <label for="msg">Grocery:</label>
     <input type="text" id="msg" name="msg">
-    <button onclick="redir()" type="submit">Send</button>
+    <button type="submit">Send</button>
   </form>
 
-  <form target="_blank" action="http://dove:5001/submit" method="post">
+  <form id="form3">
     <input type="hidden" name="list" value="ERR">
     <label for="msg">Errand:</label>
     <input type="text" id="msg" name="msg">
-    <button onclick="redir()" type="submit">Send</button>
+    <button type="submit">Send</button>
   </form>
 
   <script>
-    const form = document.querySelector("#form1");
+    const form1 = document.querySelector("#form1");
+    const form2 = document.querySelector("#form2");
+    const form3 = document.querySelector("#form3");
 
-    async function sendData() {
+    async function sendData(form) {
       const formData = new FormData(form);
-      const queryStr = new URLSearchParams(formData).toString(); 
-      console.log("STARTING sendDATA"); 
-      console.log(queryStr); 
-      console.log("HEY"); 
-
+      const queryStr = new URLSearchParams(formData).toString();
       try {
         const response = await fetch("http://dove:5001/submit", {
           method: "POST",
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'},
           body: queryStr,
         });
         console.log(await response.json());
+        // Clear form
       } catch (e) {
         console.error(e);
       }
     }
 
-    form.addEventListener("submit", (event) => {
-      event.preventDefault();
-      sendData();
-    });
+    function clearField(form) {
+      // Iterate over all elements in the form
+      for (let i = 0; i < form.elements.length; i++) {
+        let field = form.elements[i];
+
+        // Check the type of the field and reset its value accordingly
+        switch (field.type) {
+          case 'text':
+          case 'password':
+          case 'textarea':
+          case 'file':
+          case 'select-one':
+          case 'select-multiple':
+            field.value = '';
+            break;
+          case 'checkbox':
+          case 'radio':
+            field.checked = false;
+            break;
+          // Add any other input types you need to clear
+        }
+      }
+    }
+
+    function listen(form) {
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        sendData(form);
+        clearField(form);
+      });
+    }
+
+    listen(form1);
+    listen(form2);
+    listen(form3); 
   </script>
 
 </body>
