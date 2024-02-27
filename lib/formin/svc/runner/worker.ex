@@ -31,12 +31,12 @@ defmodule Formin.Svc.Runner.Worker do
 
   @doc false
   def start_link([command: cmd]) do
-    Util.IO.puts(~s[Starting Runner (cmd = "#{cmd}")])
+    Util.IO.puts(~s[Starting Worker (cmd = "#{cmd}")])
     GenServer.start_link(__MODULE__, cmd, name: @procname)
   end
 
   def start_link(_) do
-    Util.IO.puts("Starting Runner (no command)")
+    Util.IO.puts("Starting Worker (no command)")
     GenServer.start_link(__MODULE__, "", name: @procname)
   end
 
