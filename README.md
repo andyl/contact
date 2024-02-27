@@ -1,19 +1,15 @@
 # Formin 
 
-Simple HTML form handler. 
+Simple HTML form input handler.  The daemon process listens for HTML form
+inputs, converts the form data to JSON, then writes the data to an output
+channel.
 
-This daemon process listens for an HTML form post, then runs a script on the
-server to process the form data.
+| Output Channel Options | Description       |
+|------------------------|-------------------|
+| logfile `path`         | NDJSON log file   |
+| tcp `server:port`      | TCP service       |
+| fifo `path`            | Unix named pipe   |
+| socket `path`          | Unix socket       |
+| amqp `host:port/queue` | RabbitMQ Exchange |
 
-The script can be any executable program: a binary executable, or a script
-written in Bash, Elixir, Ruby, Python etc.
-
-To start the server: 
-- 1) `mix formin.server "echo HI"`
-- 2) `mix formin.server "echo HI > /tmp/myfile.txt"`
-- 3) `mix formin.server "echo '@data' > /tmp/myfile.txt"` 
-
-Now the server listens for form data at POST:/submit.
-
-The @data placeholder will be replaced by form data encoded as JSON.
 
