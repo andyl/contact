@@ -10,7 +10,7 @@ defmodule Formin.Event do
   end
 
   def lookup(action, path) do
-    routes = Formin.Setup.routes()
+    routes = Formin.Opts.routes()
     fullpath = "#{action}/#{path}"
 
     case Map.get(routes, fullpath) do
