@@ -24,6 +24,8 @@ defmodule Formin.MixProject do
       # ----- basics
       {:jason, "~> 1.4"},
       {:bandit, "~> 1.0"},
+      # ----- cli
+      {:optimus, "~> 0.5"},
       # ----- testing
       {:mix_test_interactive, "~> 2.0", only: :dev, runtime: false}
     ]
