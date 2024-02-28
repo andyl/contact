@@ -3,6 +3,9 @@ defmodule Formin.Svc.Runner.WriterTest do
   use ExUnit.Case
 
   alias Formin.Svc.Runner.Writer
+  alias Formin.Util
+
+  import ExUnit.CaptureIO
 
   describe "#myfunc/1" do
     test "description" do
@@ -31,24 +34,45 @@ defmodule Formin.Svc.Runner.WriterTest do
       assert start_supervised!(Writer)
     end
 
+    test "without bang" do
+      assert start_supervised(Writer)
+    end
+
     test "registered process name" do
       start_supervised({Writer, []})
       assert Process.whereis(:runner_writer)
     end
   end
 
-  describe "#output/logfile" do
+  describe "#output/logger" do
+    test "run" do
+      start_supervised!(Writer)
+      assert Writer.output(:logger, ".", "asdf") == :ok
+    end
+  end
+
+  describe "#output/stdout" do
+    test "run" do
+      assert with_io(fn ->
+        pid = start_supervised!(Writer)
+        GenServer.cast(pid, {:rw_stdout, ".", "asdf"})
+        GenServer.call(pid, :rw_flush)
+      end) == {:ok, "asdf\n"}
+    end
+  end
+
+  describe "#output/file" do
     test "to file" do
-      # rand = Util.File.rand()
-      # file = Path.join(System.tmp_dir!(), "datafile_#{rand}.txt")
-      # data = "HELLOWORLD"
-      # cmd  = "echo @data > #{file}"
-      # start_supervised({Worker, [command: cmd]})
-      # assert Worker.getcmd() == cmd
-      # assert Worker.post(data) == :ok
-      # assert File.exists?(file)
-      # assert File.read!(file) |> String.trim() == data
-      # System.cmd("rm", ["-f", file])
+      rand = Util.File.rand()
+      file = Path.join(System.tmp_dir!(), "testfile_#{rand}.txt")
+      data = "HELLOWORLD"
+      start_supervised(Writer)
+      result = Writer.output(:file, file, data)
+      Writer.flush()
+      assert result == :ok
+      assert File.exists?(file)
+      assert File.read!(file) |> String.trim() == data
+      System.cmd("rm", ["-f", file])
     end
   end
 
