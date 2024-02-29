@@ -1,55 +1,55 @@
 defmodule Formin.Cli do
+
   @app_version Mix.Project.config()[:version]
 
   def main(argv) do
+    config()
+    |> Optimus.parse!(argv)
+  end
+
+  def version do
+    config().version
+  end
+
+  def config do
     Optimus.new!(
       name: "formin",
-      description: "Input server for HTML form data",
+      description: "formin",
       version: @app_version,
-      about: "Input server for HTML form data",
+      about: "server/router for HTML form data",
       allow_unknown_args: false,
       parse_double_dash: true,
       args: [],
-      flags: [
-        help: [
-          short: "-h",
-          long: "--help",
-          help: "HELP",
-        ],
-        version: [
-          short: "-v",
-          long: "--version",
-          help: "Version",
-        ],
-      ],
+      flags: [],
       options: [
         port: [
+          value_name: "PORT",
           short: "-p",
           long: "--port",
           help: "Listener port",
-          parser: fn s -> s end,
+          parser: fn s -> {:ok, String.to_integer(s)} end,
           required: false,
           default: 3303
         ],
         routes: [
+          value_name: "ROUTES",
           short: "-r",
           long: "--routes",
           help: "listener routes",
-          parser: fn s -> s end,
+          parser: fn s -> {:ok, s} end,
           required: false,
           default: []
         ],
         config: [
+          value_name: "CONFIG",
           short: "-c",
           long: "--config",
           help: "config yaml file",
-          parser: fn s -> s end,
+          parser: fn s -> {:ok, s} end,
           required: false,
           default: ""
         ]
       ]
     )
-    |> Optimus.parse!(argv)
-    |> IO.inspect()
   end
 end
