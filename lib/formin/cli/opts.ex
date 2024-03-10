@@ -1,10 +1,15 @@
-defmodule Formin.Cli do
+defmodule Formin.Cli.Opts do
 
   @app_version Mix.Project.config()[:version]
 
   def main(argv) do
-    config()
-    |> Optimus.parse!(argv)
+    case Mix.env() do
+      :test ->
+        test_halt = fn _code -> :ok end
+        config() |> Optimus.parse!(argv, test_halt)
+      _ ->
+        config() |> Optimus.parse!(argv)
+    end
   end
 
   def version do
@@ -52,4 +57,5 @@ defmodule Formin.Cli do
       ]
     )
   end
+
 end
