@@ -35,6 +35,8 @@ defmodule Formin.CliTest do
 
     test "parses shortport option" do
       result = Cli.main(~w[-p 2000])
+      result |> IO.inspect()
+      IO.puts("ASDF")
       assert result.options.port == 2000
     end
 
