@@ -2,11 +2,11 @@ defmodule Formin.Svc.Runner.Worker do
 
   @moduledoc "Command Runner"
 
+  @procname :runner_worker
+
   use GenServer
 
   alias Formin.Util
-
-  @procname :runner_worker
 
   # ----- api
 
