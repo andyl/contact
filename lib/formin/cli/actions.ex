@@ -4,5 +4,10 @@ defmodule Formin.Cli.Actions do
   # def parse(input) do
   # end
 
+  def asdf do
+  end
+
+  def qwer do
+  end
 
 end
