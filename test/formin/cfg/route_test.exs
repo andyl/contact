@@ -1,8 +1,8 @@
-defmodule Formin.Cli.RouteTest do
+defmodule Formin.Cfg.RouteTest do
 
   use ExUnit.Case
 
-  alias Formin.Cli.Route
+  alias Formin.Cfg.Route
 
   describe "#parse/1" do
     test "empty string" do
