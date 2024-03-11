@@ -2,6 +2,8 @@ defmodule Formin.Cli.Opts do
 
   @app_version Mix.Project.config()[:version]
 
+  alias Formin.Cfg.Route
+
   def main(argv) do
     case Mix.env() do
       :test ->
@@ -41,7 +43,7 @@ defmodule Formin.Cli.Opts do
           short: "-r",
           long: "--routes",
           help: "listener routes",
-          parser: fn s -> {:ok, s} end,
+          parser: fn s -> {:ok, Route.parse(s)} end,
           required: false,
           default: []
         ],
