@@ -1,10 +1,10 @@
-defmodule Formin.Cli.Route do
+defmodule Formin.Cfg.Route do
 
   defstruct method: "",
             path: "",
             actions: []
 
-  alias Formin.Cli.Route
+  alias Formin.Cfg.Route
 
   # post:contact[log=path;fifo=path],post:checklist[log=path]
   # errors:
@@ -19,6 +19,7 @@ defmodule Formin.Cli.Route do
   def parse(input) do
     input
     |> String.split(",")
+    |> Enum.map(&(handle_route(&1)))
   end
 
   def handle_route("") do
