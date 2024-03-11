@@ -18,10 +18,11 @@ defmodule Formin.Svc.Supervisor do
   @impl true
   def init(_init_arg) do
     if Application.get_env(:formin, :server) do
-      cmd = Application.get_env(:formin, :command) || ""
+      # cmd = Application.get_env(:formin, :command) || ""
       children = [
         Formin.Svc.Httpd.Server,
-        {Formin.Svc.Runner.Supervisor, [command: cmd]}
+        Formin.Svc.Writer,
+        # {Formin.Svc.Runner.Supervisor, [command: cmd]}
       ]
       Supervisor.init(children, strategy: :one_for_one)
     else
