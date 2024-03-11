@@ -43,4 +43,13 @@ defmodule Formin.Cli.OptsTest do
       assert result.options.port == 2000
     end
   end
+
+  describe "#main/1 route" do
+    test "route lane" do
+      result = Cli.Opts.main(~w(--routes post:path[fifo=file]))
+      assert result
+    end
+  end
+
 end
+
