@@ -1,4 +1,4 @@
-defmodule Formin.Cli.Opts do
+defmodule Formin.Cli do
 
   @app_version Mix.Project.config()[:version]
 
