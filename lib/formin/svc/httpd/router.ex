@@ -62,14 +62,6 @@ defmodule Formin.Svc.Httpd.Router do
     send_resp(conn, code, msg)
   end
 
-  # post "/submit" do
-  #   conn.params
-  #   |> Jason.encode!()
-  #   |> Worker.post()
-  #
-  #   send_resp(conn, 200, ~s[{"status": "form-data-ok"}])
-  # end
-
   match _ do
     Logger.error("File not found: #{conn.request_path}")
     send_resp(conn, 404, "NOT FOUND")
