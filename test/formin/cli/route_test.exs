@@ -4,16 +4,26 @@ defmodule Formin.Cli.RouteTest do
 
   alias Formin.Cli.Route
 
-  describe "Overview" do
-    test "with blank string" do
-      assert Route
+  describe "#parse/1" do
+    test "empty string" do
+      assert Route.parse("") == []
     end
   end
 
-  describe "#extract/1" do
+  describe "#handle_route/1" do
     test "with blank string" do
-      assert Route.extract("")
+      assert Route.handle_route("") == [""]
     end
+
+    test "with full-blown string" do
+      string = "post:contact[log=path;fifo=path]"
+      result = Route.handle_route(string)
+      assert result.method == "post"
+      assert result.path == "contact"
+      assert result.actions[:log] == "path"
+      assert result.actions[:fifo] == "path"
+    end
+
   end
 
 end
