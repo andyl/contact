@@ -42,50 +42,52 @@ defmodule Formin.Svc.Runner do
   # ----- api
 
   def event(msg) do
+    ensure_started()
     GenServer.cast(@procname, {:fr_event, msg})
   end
 
   def flush do
+    ensure_started()
     GenServer.call(@procname, :fr_flush)
   end
 
   def output(:file, path, json) do
+    ensure_started()
     GenServer.cast(@procname, {:fr_file, path, json})
-    :ok
   end
 
   def output(:logger, pattern, json) do
+    ensure_started()
     GenServer.cast(@procname, {:fr_logger, pattern, json})
-    :ok
   end
 
   def output(:stdout, pattern, json) do
+    ensure_started()
     GenServer.cast(@procname, {:fr_stdout, pattern, json})
-    :ok
   end
 
   def output(:fifo, _path, _json) do
-    :ok
+    ensure_started()
   end
 
   def output(:amqp, _path, _json) do
-    :ok
+    ensure_started()
   end
 
   def output(:tcp, _path, _json) do
-    :ok
+    ensure_started()
   end
 
   def output(:socket, _path, _json) do
-    :ok
+    ensure_started()
   end
 
   def output(:shell, _path, _json) do
-    :ok
+    ensure_started()
   end
 
   def output(_, _path, _json) do
-    :ok
+    ensure_started()
   end
 
   # ----- callbacks
@@ -132,22 +134,8 @@ defmodule Formin.Svc.Runner do
     IO.inspect({msg, state}, label: "PROCESS_EVENT")
   end
 
-  def bash("") do
-    :ok
-  end
-
-  def bash(cmd) do
-    args = ["-c", cmd]
-    System.cmd("bash", args)
-  end
-
-  def bash("", _data) do
-    :ok
-  end
-
-  def bash(cmd, data) do
-    newcmd = String.replace(cmd, "@data", data)
-    bash(newcmd)
+  defp ensure_started do
+    unless Process.whereis(@procname), do: start_link([])
   end
 
 end

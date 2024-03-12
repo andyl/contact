@@ -17,7 +17,7 @@ defmodule Formin.Svc.Opts do
   - [ ] Add tests for options
   """
 
-  @procname :formin_opts
+  @procname :svc_opts
 
   use Agent
 
@@ -35,19 +35,23 @@ defmodule Formin.Svc.Opts do
   # ----- api
 
   def set_state(newstate) do
+    ensure_started()
     Agent.update(@procname, fn _ -> newstate end)
     get_state()
   end
 
   def clear_state do
+    ensure_started()
     Agent.update(@procname, fn _ -> %{} end)
   end
 
   def merge_state(newstate) do
+    ensure_started()
     Agent.update(@procname, fn oldstate -> Map.merge(oldstate, newstate) end)
   end
 
   def get_state do
+    ensure_started()
     Agent.get(@procname, &(&1))
   end
 
@@ -58,5 +62,9 @@ defmodule Formin.Svc.Opts do
   end
 
   # ----- helpers
+
+  defp ensure_started do
+    unless Process.whereis(@procname), do: start_link([])
+  end
 
 end
