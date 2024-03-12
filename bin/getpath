@@ -1,0 +1,4 @@
+#!/usr/bin/env elixir 
+
+path = __ENV__.file |> Path.dirname() |> Path.dirname()
+IO.puts(path)

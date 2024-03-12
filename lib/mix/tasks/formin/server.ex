@@ -11,7 +11,6 @@ defmodule Mix.Tasks.Formin.Server do
 
     Application.put_env(:formin, :port, cli_opts.options.port)
     Application.put_env(:formin, :server, true)
-
     Mix.Task.run("app.start", ["--preload-modules"])
 
     cli_opts
