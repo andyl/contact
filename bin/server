@@ -6,8 +6,6 @@ Mix.install([
 
 cli_opts = Formin.Pom.Cli.main(System.argv())
 
-# IO.inspect(cli_opts) 
-
 Application.put_env(:formin, :port, cli_opts.options.port)
 Application.put_env(:formin, :server, true)
 
