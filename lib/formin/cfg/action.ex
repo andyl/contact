@@ -1,16 +1,30 @@
-defmodule Formin.Cfg.Route do
+defmodule Formin.Cfg.Action do
+
+  @moduledoc """
+  Cfg Action
+
+  post:contact[log=path;fifo=path],post:checklist[log=path]
+
+  - log    `path`            | log file
+  - fifo   `path`            | named pipe (fifo)
+  - amqp   `host:port/queue` | rabbit mq
+  - tcp    `host:port`       | tcp server
+  - socket `path`            | linux socket
+  - logger `regex`           | log file
+  - stdout `regex`           | stdout
+  - shell  `path`            | run shell script
+
+  errors:
+  - no actions
+  - no method
+  - no path
+  """
 
   defstruct method: "",
             path: "",
             actions: []
 
-  alias Formin.Cfg.Route
-
-  # post:contact[log=path;fifo=path],post:checklist[log=path]
-  # errors:
-  # - no actions
-  # - no method
-  # - no path
+  alias Formin.Cfg.Action
 
   def parse("") do
     []
@@ -31,7 +45,7 @@ defmodule Formin.Cfg.Route do
       ~r/(.*):(.*)\[(.*)\]/
       |> Regex.scan(string)
 
-    %Route{
+    %Action{
       method: method,
       path: path,
       actions: handle_actions(actions)
