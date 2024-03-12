@@ -1,23 +1,23 @@
-defmodule Formin.Cfg.RouteTest do
+defmodule Formin.Cfg.ActionTest do
 
   use ExUnit.Case
 
-  alias Formin.Cfg.Route
+  alias Formin.Cfg.Action
 
   describe "#parse/1" do
     test "empty string" do
-      assert Route.parse("") == []
+      assert Action.parse("") == []
     end
   end
 
   describe "#handle_route/1" do
     test "with blank string" do
-      assert Route.handle_route("") == [""]
+      assert Action.handle_route("") == [""]
     end
 
     test "with full-blown string" do
       string = "post:contact[log=path;fifo=path]"
-      result = Route.handle_route(string)
+      result = Action.handle_route(string)
       assert result.method == "post"
       assert result.path == "contact"
       assert result.actions[:log] == "path"

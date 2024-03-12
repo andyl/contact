@@ -3,7 +3,6 @@ defmodule Formin.Svc.SupervisorTest do
   use ExUnit.Case, async: false
 
   alias Formin.Svc.Supervisor
-  # alias Formin.Svc.Runner.Worker
 
   describe "#start_link/1" do
     test "with [server: true]" do
@@ -16,7 +15,6 @@ defmodule Formin.Svc.SupervisorTest do
       cmd = "echo HI"
       Application.put_env(:formin, :command, cmd)
       assert start_supervised!({Supervisor, [server: true]})
-      # assert Worker.getcmd() == cmd
     end
   end
 
