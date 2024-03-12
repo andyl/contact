@@ -36,6 +36,7 @@ defmodule Formin.Svc.Opts do
 
   def set_state(newstate) do
     Agent.update(@procname, fn _ -> newstate end)
+    get_state()
   end
 
   def clear_state do

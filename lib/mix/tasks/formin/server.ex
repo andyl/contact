@@ -6,20 +6,18 @@ defmodule Mix.Tasks.Formin.Server do
 
   @impl Mix.Task
   def run(args) do
-    IO.inspect(args, label: "ZZZ")
+
+    cli_opts = Formin.Pom.Cli.main(args)
+
+    Application.put_env(:formin, :port, cli_opts.options.port)
     Application.put_env(:formin, :server, true)
-    IO.puts("AAA")
+
     Mix.Task.run("app.start", ["--preload-modules"])
 
-    args
-    |> Formin.Pom.Cli.main()
-    |> IO.inspect(label: "CRAZED")
+    cli_opts
     |> Formin.Svc.Opts.set_state()
+    |> IO.inspect(label: "CRAZED")
 
-    Formin.Svc.Opts.get_state()
-    |> IO.inspect(label: "MILLION")
-
-    IO.puts("BBB")
     Mix.Tasks.Run.run(["--no-halt"])
   end
 
