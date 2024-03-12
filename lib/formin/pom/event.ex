@@ -1,6 +1,6 @@
 defmodule Formin.Event do
 
-  alias Formin.Svc.Runner.Writer
+  alias Formin.Svc.Runner
 
   def process(action, path, data) do
     case lookup(action, path) do
@@ -10,7 +10,7 @@ defmodule Formin.Event do
   end
 
   def lookup(action, path) do
-    routes = Formin.Cfg.Opts.default_routes()
+    routes = Formin.Svc.Opts.default_routes()
     fullpath = "#{action}/#{path}"
 
     case Map.get(routes, fullpath) do
@@ -27,7 +27,7 @@ defmodule Formin.Event do
 
     result =
       outputs
-      |> Enum.map(fn {type, address} -> Writer.output(type, address, json) end)
+      |> Enum.map(fn {type, address} -> Runner.output(type, address, json) end)
       |> Enum.all?(fn val -> val == :ok end)
 
     case result do

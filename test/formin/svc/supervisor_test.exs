@@ -15,6 +15,8 @@ defmodule Formin.Svc.SupervisorTest do
       cmd = "echo HI"
       Application.put_env(:formin, :command, cmd)
       assert start_supervised!({Supervisor, [server: true]})
+      assert Process.whereis(:svc_runner)
+      assert Process.whereis(:formin_opts)
     end
   end
 

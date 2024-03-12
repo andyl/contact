@@ -20,7 +20,8 @@ defmodule Formin.Svc.Supervisor do
     if Application.get_env(:formin, :server) do
       children = [
         Formin.Svc.Httpd.Server,
-        Formin.Svc.Runner
+        Formin.Svc.Runner,
+        Formin.Svc.Opts
       ]
       Supervisor.init(children, strategy: :one_for_one)
     else

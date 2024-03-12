@@ -1,4 +1,4 @@
-defmodule Formin.Cfg.Action do
+defmodule Formin.Pom.Action do
 
   @moduledoc """
   Cfg Action
@@ -24,7 +24,7 @@ defmodule Formin.Cfg.Action do
             path: "",
             actions: []
 
-  alias Formin.Cfg.Action
+  alias Formin.Pom.Action
 
   def parse("") do
     []

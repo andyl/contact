@@ -1,8 +1,8 @@
-defmodule Formin.Cli do
+defmodule Formin.Pom.Cli do
 
   @app_version Mix.Project.config()[:version]
 
-  alias Formin.Cfg.Action
+  alias Formin.Pom.Action
 
   def main(argv) do
     case Mix.env() do

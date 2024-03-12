@@ -1,8 +1,8 @@
-defmodule Formin.Cfg.ActionTest do
+defmodule Formin.Pom.ActionTest do
 
   use ExUnit.Case
 
-  alias Formin.Cfg.Action
+  alias Formin.Pom.Action
 
   describe "#parse/1" do
     test "empty string" do

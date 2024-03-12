@@ -1,4 +1,21 @@
-defmodule Formin.Cfg.Opts do
+defmodule Formin.Svc.Opts do
+
+  @moduledoc """
+  Options
+
+  Configuration Opts
+  - [ ] command-line options
+  - [ ] environment variables
+  - [ ] yaml file
+  - [ ] elixir configuration
+
+  Opts
+  - [ ] options for dev, test & prod
+  - [ ] options for environment variables
+  - [ ] options for command line
+  - [ ] options for yaml file
+  - [ ] Add tests for options
+  """
 
   @procname :formin_opts
 
@@ -35,7 +52,7 @@ defmodule Formin.Cfg.Opts do
 
   # ----- startup
 
-  def start_link(initial_state \\ %{}) when is_map(initial_state) do
+  def start_link(initial_state \\ []) do
     Agent.start_link(fn -> initial_state end, name: @procname)
   end
 

@@ -1,10 +1,10 @@
-defmodule Formin.CliTest do
+defmodule Formin.Pom.CliTest do
 
   use ExUnit.Case
 
   import ExUnit.CaptureIO
 
-  alias Formin.Cli
+  alias Formin.Pom.Cli
 
   describe "#config/0" do
     test "returns data" do
