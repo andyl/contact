@@ -1,5 +1,4 @@
 defmodule Mix.Tasks.Formin.Server do
-  @shortdoc "Starts the server"
 
   @moduledoc "Starts the server"
 
@@ -14,20 +13,15 @@ defmodule Mix.Tasks.Formin.Server do
 
     args
     |> Formin.Pom.Cli.main()
+    |> IO.inspect(label: "CRAZED")
     |> Formin.Svc.Opts.set_state()
+
+    Formin.Svc.Opts.get_state()
+    |> IO.inspect(label: "MILLION")
 
     IO.puts("BBB")
     Mix.Tasks.Run.run(["--no-halt"])
   end
 
-  # @impl Mix.Task
-  # def run([cmd]) when is_binary(cmd) do
-  #   IO.inspect(cmd, label: "XXX")
-  #   run(cmd)
-  # end
-  #
-  # def run(_) do
-  #   run("")
-  # end
-
 end
+
