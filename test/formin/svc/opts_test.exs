@@ -37,7 +37,7 @@ defmodule Formin.Svc.OptsTest do
 
     test "registered process name" do
       start_supervised({Opts, []})
-      assert Process.whereis(:formin_opts)
+      assert Process.whereis(:svc_opts)
     end
   end
 
