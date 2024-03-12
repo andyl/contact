@@ -1,21 +1,17 @@
 #!/usr/bin/env elixir 
 
 Mix.install([ 
-  # :formin, path: __ENV__.file |> Path.dirname() |> Path.dirname()
-  # :formin, path: "/home/aleak/src/formin"
-  :formin, github: "andyl/formin"
+  {:formin, path: __ENV__.file |> Path.dirname() |> Path.dirname()} 
 ])
 
 cli_opts = Formin.Pom.Cli.main(System.argv())
 
+# IO.inspect(cli_opts) 
+
 Application.put_env(:formin, :port, cli_opts.options.port)
 Application.put_env(:formin, :server, true)
 
-Mix.Task.run("app.start", ["--preload-modules"])
+Formin.Svc.Supervisor.start_link([])
 
-cli_opts
-|> Formin.Svc.Opts.set_state()
-|> IO.inspect(label: "CRAZED")
-
-Mix.Tasks.Run.run(["--no-halt"])
+Process.sleep(:infinity)
 

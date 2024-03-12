@@ -15,7 +15,7 @@ defmodule Mix.Tasks.Formin.Server do
 
     cli_opts
     |> Formin.Svc.Opts.set_state()
-    |> IO.inspect(label: "CRAZED")
+    |> IO.inspect(label: "OPTS")
 
     Mix.Tasks.Run.run(["--no-halt"])
   end
