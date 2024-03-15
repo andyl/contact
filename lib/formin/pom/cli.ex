@@ -4,7 +4,13 @@ defmodule Formin.Pom.Cli do
 
   alias Formin.Pom.Action
 
-  def main(argv) do
+  def parse(argv) when is_binary(argv) do
+    argv
+    |> String.split(" ")
+    |> parse()
+  end
+
+  def parse(argv) do
     case Mix.env() do
       :test ->
         test_halt = fn _code -> :ok end
@@ -38,15 +44,6 @@ defmodule Formin.Pom.Cli do
           required: false,
           default: 3303
         ],
-        routes: [
-          value_name: "ROUTES",
-          short: "-r",
-          long: "--routes",
-          help: "listener routes",
-          parser: fn s -> {:ok, Action.parse(s)} end,
-          required: false,
-          default: []
-        ],
         config: [
           value_name: "CONFIG",
           short: "-c",
@@ -55,7 +52,16 @@ defmodule Formin.Pom.Cli do
           parser: fn s -> {:ok, s} end,
           required: false,
           default: ""
-        ]
+        ],
+        actions: [
+          value_name: "ACTIONS",
+          short: "-a",
+          long: "--actions",
+          help: "server actions",
+          parser: fn s -> {:ok, Action.parse(s)} end,
+          required: false,
+          default: []
+        ],
       ]
     )
   end
