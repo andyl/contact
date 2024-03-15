@@ -4,9 +4,10 @@ Mix.install([
   {:formin, path: __ENV__.file |> Path.dirname() |> Path.dirname()} 
 ])
 
-cli_opts = Formin.Pom.Cli.main(System.argv())
+cli_opts = Formin.Pom.Cli.parse(System.argv())
 
 Application.put_env(:formin, :port, cli_opts.options.port)
+Application.put_env(:formin, :config, cli_opts.options.config)
 Application.put_env(:formin, :server, true)
 
 Formin.Svc.Supervisor.start_link([])
