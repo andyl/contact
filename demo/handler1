@@ -9,7 +9,7 @@ defmodule JsonDecrypter do
     [json_encrypted] = args
     json_decrypted = decrypt(json_encrypted)
     decoded_data = Jason.decode!(json_decrypted)
-    IO.inspect(decoded_data)
+    # IO.inspect(decoded_data)
   end
 
   # Placeholder for the decryption function

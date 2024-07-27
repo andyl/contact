@@ -47,7 +47,7 @@ defmodule Formin.Pom.CliTest do
 
   describe "#parse/1" do
     test "actions" do
-      result = Cli.parse(~w(--actions post:path[fifo=file])) |> IO.inspect()
+      result = Cli.parse(~w(--actions post:path[fifo=file]))
       assert result
     end
   end
